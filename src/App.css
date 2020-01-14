@@ -1,10 +1,52 @@
 .App {
   text-align: center;
+  background-color: #282c34;
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+  
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.chatWindow {
+  display:flex;
+  justify-items: center;
+
+}
+
+.btn-cont {
+  background-color: #282c34;
+  width: 25vw;
+}
+
+.btn-logout {
+  width: 55px;
+  height: 35px;
+  background-color: #6a6c70;
+  color: white;
+}
+
+.chat {
+  text-align: center;
+  background-color: #282c34;
+  height: 80vh;
+  width: 75vw;
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-end;
+  align-content: flex-start;
+  overflow: auto;
+  border: 2px solid white;
+}
+
+.loginScreen {
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+}
+
+.title {
+ 
+color: white;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -13,16 +55,13 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.listItem {
+  list-style: none;
+  text-align: left;
   color: white;
 }
+
+
 
 .App-link {
   color: #61dafb;
