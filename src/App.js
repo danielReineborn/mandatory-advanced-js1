@@ -37,12 +37,12 @@ class App extends React.Component {
 
     }
     return (
-      <div className="App">
-        {element}
+      <section className="moac">
+        <div className="App">
+          {element}
+        </div>
 
-
-
-      </div>
+      </section>
     );
   }
 }

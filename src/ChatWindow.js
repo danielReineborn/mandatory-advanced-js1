@@ -14,6 +14,7 @@ class ChatWindow extends React.Component {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.logOut = this.logOut.bind(this);
+        this.scrollBar = React.createRef();
     }
 
     renderPastMsg(data) {
@@ -24,8 +25,11 @@ class ChatWindow extends React.Component {
     }
 
     scrollBottom() {
-        let element = document.querySelector(".chat");
-        element.scrollTop = element.scrollHeight;
+        /* let element = document.querySelector(".chat");
+        element.scrollTop = element.scrollHeight; */
+
+        //Bättre
+        this.scrollBar.current.scrollTo(0, this.scrollBar.current.scrollHeight)
     }
 
     onChange(e) {
@@ -89,11 +93,20 @@ class ChatWindow extends React.Component {
         this.scrollBottom();
     }
     render() {
+        //count chars in state.value
+        let charCount = this.state.value.length;
+
 
         return (
-            <section className="chatWindow">
 
-                <div className="chat">
+
+            <section className="chatWindow">
+                <div className="btn-cont">
+
+                    <button onClick={this.logOut} className="btn-std">Close</button>
+                </div>
+
+                <div className="chat" ref={this.scrollBar}>
                     <ul>
 
                         {this.state.pastMsgs.map((x) => {
@@ -104,13 +117,13 @@ class ChatWindow extends React.Component {
                             return <ListItem key={x.id}>{`${x.username}: ${x.content}`}</ListItem>
                         })}
                     </ul>
-                    <form onSubmit={this.onSubmit}>
-                        <input required maxLength="200" onChange={this.onChange} type="textarea" value={this.state.value} />
-                    </form>
                 </div >
-                <div className="btn-cont">
+                <div className="input-chat">
+                    <form onSubmit={this.onSubmit}>
+                        <input required minLength="1" maxLength="200" onChange={this.onChange} type="text" value={this.state.value} />
+                    </form>
+                    <p className="count">{charCount}/200</p>
 
-                    <button onClick={this.logOut} className="btn-logout">Logout!</button>
                 </div>
             </section>
         )
