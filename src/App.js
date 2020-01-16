@@ -12,7 +12,6 @@ class App extends React.Component {
       loggedIn: false,
     }
     this.onLogin = this.onLogin.bind(this);
-
   }
 
   onLogin = (userName, bool) => {
@@ -20,11 +19,10 @@ class App extends React.Component {
       userName: userName,
       loggedIn: bool
     })
-
   }
 
   render() {
-    const socket = io('http://3.120.96.16:3000'); // soclet ska bara ligga här, måste skicka vidare socket, för att sedan hantera this.props.scoket/emit i andra komponenter.
+    const socket = io('http://3.120.96.16:3000');
 
 
     let element;
@@ -34,14 +32,12 @@ class App extends React.Component {
 
     } else if (this.state.loggedIn) {
       element = <ChatWindow socket={socket} onLogin={this.onLogin} username={this.state.userName}></ChatWindow>;
-
     }
     return (
       <section className="moac">
         <div className="App">
           {element}
         </div>
-
       </section>
     );
   }

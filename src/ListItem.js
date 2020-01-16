@@ -6,9 +6,7 @@ import Linkify from 'react-linkify';
 class ListItem extends React.Component {
     constructor(props) {
         super(props);
-
     }
-
     render() {
         return (
             <li className="listItem"><Linkify>{emojify(this.props.children)}</Linkify></li>

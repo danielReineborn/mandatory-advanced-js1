@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './App.css';
 
 class Login extends React.Component {
@@ -34,7 +33,6 @@ class Login extends React.Component {
     render() {
         let words = this.state.value.split("").filter(x => x);
         let wordCount = words.length;
-
         let notValid = /[äöåÄÖÅ]/;
         let validInfo = null;
         if (notValid.test(this.state.value)) {

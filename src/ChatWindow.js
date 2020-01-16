@@ -64,17 +64,15 @@ class ChatWindow extends React.Component {
 
     componentDidMount() {
         this.props.socket.on('connect', function () {
-            console.log("connected!");
         })
         this.props.socket.on("messages", (data) => {
-            console.log(data);
+
             this.setState({
                 pastMsgs: data,
             })
 
         })
         this.props.socket.on("new_message", (data) => {
-            console.log(data);
             this.setState((state) => {
                 let messages = state.messages.concat({
                     content: data.content,
@@ -95,25 +93,17 @@ class ChatWindow extends React.Component {
     render() {
         //count chars in state.value
         let charCount = this.state.value.length;
-
-
         return (
-
-
             <section className="chatWindow">
                 <div className="btn-cont">
-
                     <button onClick={this.logOut} className="btn-std">Close</button>
                 </div>
-
                 <div className="chat" ref={this.scrollBar}>
                     <ul>
-
                         {this.state.pastMsgs.map((x) => {
                             return <ListItem key={x.id}>{`${x.username}: ${x.content}`}</ListItem>
                         })}
                         {this.state.messages.map((x) => {
-
                             return <ListItem key={x.id}>{`${x.username}: ${x.content}`}</ListItem>
                         })}
                     </ul>
@@ -123,7 +113,6 @@ class ChatWindow extends React.Component {
                         <input required minLength="1" maxLength="200" onChange={this.onChange} type="text" value={this.state.value} />
                     </form>
                     <p className="count">{charCount}/200</p>
-
                 </div>
             </section>
         )
