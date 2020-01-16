@@ -37,7 +37,7 @@ class Login extends React.Component {
         let validInfo = null;
         if (notValid.test(this.state.value)) {
             validInfo = <p className="words">"ÅÄÖ" is not valid.</p>
-        } else if (/^[\s]+$/g.test(this.state.value)) {
+        } else if (/^\s+$/g.test(this.state.value)) {
             validInfo = <p className="words">Use some letter(s) along with your spaces.</p>
         }
 

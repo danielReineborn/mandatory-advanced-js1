@@ -97,6 +97,7 @@ class ChatWindow extends React.Component {
             <section className="chatWindow">
                 <div className="btn-cont">
                     <button onClick={this.logOut} className="btn-std">Close</button>
+                    <h4 className="words">Welcome {this.props.username}!</h4>
                 </div>
                 <div className="chat" ref={this.scrollBar}>
                     <ul>
