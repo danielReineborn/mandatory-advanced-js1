@@ -31,12 +31,14 @@ class Login extends React.Component {
 
 
     render() {
-        let words = this.state.value.split("").filter(x => x);
-        let wordCount = words.length;
+        let chars = this.state.value.split("");
+        let charCount = chars.length;
         let notValid = /[äöåÄÖÅ]/;
         let validInfo = null;
         if (notValid.test(this.state.value)) {
             validInfo = <p className="words">"ÅÄÖ" is not valid.</p>
+        } else if (/^[\s]+$/g.test(this.state.value)) {
+            validInfo = <p className="words">Use some letter(s) along with your spaces.</p>
         }
 
         return (
@@ -47,7 +49,7 @@ class Login extends React.Component {
                     <input required pattern="[a-zA-Z0-9\s_-]{1,12}" value={this.state.value} maxLength="12" onChange={this.onChange} type="text" name="" id="login" />
                     <input className="btn-std btn-login" type="submit" value="Login" />
                 </form>
-                <p className="count">{wordCount}/12</p>
+                <p className="count">{charCount}/12</p>
                 {validInfo}
                 <p className="foot-info">-powered by Socket.io</p>
             </div >
