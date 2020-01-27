@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import ListItem from './ListItem';
+import io from 'socket.io-client';
 
 class ChatWindow extends React.Component {
     constructor(props) {
@@ -15,6 +16,8 @@ class ChatWindow extends React.Component {
         this.onSubmit = this.onSubmit.bind(this);
         this.logOut = this.logOut.bind(this);
         this.scrollBar = React.createRef();
+        this.socket = io('http://3.120.96.16:3000');
+
     }
 
     renderPastMsg(data) {
@@ -25,10 +28,6 @@ class ChatWindow extends React.Component {
     }
 
     scrollBottom() {
-        /* let element = document.querySelector(".chat");
-        element.scrollTop = element.scrollHeight; */
-
-        //Bättre
         this.scrollBar.current.scrollTo(0, this.scrollBar.current.scrollHeight)
     }
 
@@ -38,7 +37,7 @@ class ChatWindow extends React.Component {
 
     onSubmit(e) {
         e.preventDefault();
-        this.props.socket.emit("message", {
+        this.socket.emit("message", {
             username: this.props.username,
             content: this.state.value,
         }, function () {
@@ -63,16 +62,16 @@ class ChatWindow extends React.Component {
     }
 
     componentDidMount() {
-        this.props.socket.on('connect', function () {
+        this.socket.on('connect', function () {
         })
-        this.props.socket.on("messages", (data) => {
+        this.socket.on("messages", (data) => {
 
             this.setState({
                 pastMsgs: data,
             })
 
         })
-        this.props.socket.on("new_message", (data) => {
+        this.socket.on("new_message", (data) => {
             this.setState((state) => {
                 let messages = state.messages.concat({
                     content: data.content,
@@ -84,8 +83,7 @@ class ChatWindow extends React.Component {
         })
     }
     componentWillUnmount() {
-        let socket = this.props.socket;
-        socket.off();
+        this.socket.off();
     }
     componentDidUpdate() {
         this.scrollBottom();
